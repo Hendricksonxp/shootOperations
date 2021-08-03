@@ -2,6 +2,8 @@ import unittest
 from datetime import date
 from shoot import Shoot
 from event import Event
+from shooter import Shooter
+from entry import Entry
 
 
 
@@ -12,10 +14,14 @@ class MyTestCase(unittest.TestCase):
     def test_shooter_score(self):
         shoot = self.create_test_shoot()
         event = self.create_test_event(shoot)
+        shoot.add_event(event)
         shooter1 = self.create_test_shooter1()
         shooter2 = self.create_test_shooter2()
         event.add_entry(shooter1, 1, 3)
         event.add_entry(shooter2, 1, 1)
+
+        self.assertEqual(2, len(event.entries))
+        self.assertEqual('2104285', event.get_entry(1,3).id())
         event.add_score(1, 1, 25, 24, 23, 25)
         event.add_score(1, 3, 24, 23, 23, 25)
 
@@ -30,14 +36,14 @@ class MyTestCase(unittest.TestCase):
         return shoot
 
     def create_test_event(self, aShoot):
-        event = Event(aShoot, 1, "SINGLES", 100)
+        event = Event(1, "SINGLES", 100)
         return event
 
     def create_test_shooter1(self):
-        return Shooter(2104285, 'Chet Hendrickson')
+        return Shooter('2104285', 'Chet Hendrickson')
 
     def create_test_shooter2(self):
-        return Shooter(9203001, 'Sue Hendrickson')
+        return Shooter('9203001', 'Sue Hendrickson')
 
 if __name__ == '__main__':
     unittest.main()

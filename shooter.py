@@ -7,4 +7,4 @@ class Shooter:
     self.name = name
 
     def id(self):
-        return self_id
+        return self.id

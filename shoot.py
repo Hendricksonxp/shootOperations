@@ -3,20 +3,23 @@
 
 class Shoot:
     def __init__(self):
-    start_date = ''
-    end_date = ''
-    club = ''
-    events = []
+        self.start_date = ''
+        self.end_date = ''
+        self.club = ''
+        self.events = []
+
+    def add_event(self, anEvent):
+        self.events.append(anEvent)
 
     def add_club(self, name):
-        club = name
+        self.club = name
 
     def add_start_date(self, date):
-        start_date = date
+        self.start_date = date
 
     def add_end_date(self, date):
-        end_date = date
+        self.end_date = date
 
-    def score_for(anEvent, anId):
-        event = filter(lambda each: each.event_number() == anEvent, events)
-        return event(score_for(id))
+    def score_for(self, anEvent, anId):
+        event = filter(lambda each: each.event_number() == anEvent, self.events)
+        return event.score_for(anId)
