@@ -16,3 +16,7 @@ class Entry:
 
     def post(self):
         return post
+
+    def score(self):
+        scores = (sub_event_1,sub_event_2,sub_event_3,sub_event_4 )
+        return sum(scores)
