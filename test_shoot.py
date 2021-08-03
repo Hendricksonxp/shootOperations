@@ -11,6 +11,16 @@ class MyTestCase(unittest.TestCase):
     def test_hookup(self):
         self.assertEqual(True, True)
 
+    def test_lambda(self):
+        aLambda = lambda each: each == 2
+        self.assertTrue(aLambda(2))
+
+    def test_filter(self):
+        aList = [1,2,3]
+        aLambda = lambda each: each == 2
+        result = next(filter(aLambda, aList))
+        self.assertEqual(2, result)
+
     def test_shooter_score(self):
         shoot = self.create_test_shoot()
         event = self.create_test_event(shoot)
@@ -18,6 +28,9 @@ class MyTestCase(unittest.TestCase):
         shooter1 = self.create_test_shooter1()
         shooter2 = self.create_test_shooter2()
         event.add_entry(shooter1, 1, 3)
+
+        self.assertEqual('2104285', Entry(shooter1, 1, 3).id())
+
         event.add_entry(shooter2, 1, 1)
 
         self.assertEqual(2, len(event.entries))
