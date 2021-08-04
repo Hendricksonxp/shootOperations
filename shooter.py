@@ -2,9 +2,9 @@
 
 
 class Shooter:
-   def __init__(self, id, name):
-    self.id = id
-    self.name = name
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
 
-    def id(self):
-        return self.id
+    def is_id(self, id):
+        return self.id == id

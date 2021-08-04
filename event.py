@@ -17,11 +17,11 @@ class Event:
         entry.add_scores(score_1, score_2, score_3, score_4)
 
     def get_entry(self, squad, post):
-        return next(filter(lambda each: each.squad == squad and each.post == post, self.entries))
-
-    def event_number(self):
-        return self.event_number
+        return next(filter(lambda each: each.is_position(squad, post), self.entries))
 
     def score_for(self, id):
-        entry = next(filter(lambda each: each.id() == id, self.entries))
+        entry = next(filter(lambda each: each.is_id(id) , self.entries))
         return entry.score()
+
+    def is_event_number(self, anEvent_number):
+        return self.event_number == anEvent_number

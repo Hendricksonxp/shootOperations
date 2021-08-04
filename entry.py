@@ -1,4 +1,6 @@
 
+import array as array
+from shooter import Shooter
 
 
 class Entry:
@@ -6,26 +8,23 @@ class Entry:
         self.shooter = shooter
         self.squad = squad
         self.post = post
-        self.sub_event_1 = 0
-        self.sub_event_2 = 0
-        self.sub_event_3 = 0
-        self.sub_event_4 = 0
-
-    def squad(self):
-        return self.squad
-
-    def post(self):
-        return self.post
+        self.scores = array.array('i', [0, 0, 0, 0])
 
     def add_scores(self, s1, s2, s3, s4):
-        self.sub_event_1 = s1
-        self.sub_event_2 = s2
-        self.sub_event_3 = s3
-        self.sub_event_4 = s4
+        self.scores.insert(0, s1)
+        self.scores.insert(1, s2)
+        self.scores.insert(2, s3)
+        self.scores.insert(3, s4)
+
 
     def score(self):
-        scores = (self.sub_event_1,self.sub_event_2,self.sub_event_3,self.sub_event_4 )
-        return sum(scores)
+        return sum(self.scores)
 
     def id(self):
         return self.shooter.id
+
+    def is_position(self, squad, post):
+        return self.squad == squad and self.post == post
+
+    def is_id(self, aString):
+        return self.shooter.is_id(aString)

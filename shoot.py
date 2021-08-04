@@ -1,4 +1,4 @@
-
+from event import Event
 
 
 class Shoot:
@@ -20,6 +20,6 @@ class Shoot:
     def add_end_date(self, date):
         self.end_date = date
 
-    def score_for(self, anEvent, anId):
-        event = next(filter(lambda each: each.event_number == anEvent, self.events))
+    def score_for(self, anEvent_number, anId):
+        event = next(filter(lambda each: each.is_event_number(anEvent_number)  , self.events))
         return event.score_for(anId)
