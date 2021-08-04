@@ -21,5 +21,5 @@ class Shoot:
         self.end_date = date
 
     def score_for(self, anEvent, anId):
-        event = filter(lambda each: each.event_number() == anEvent, self.events)
+        event = next(filter(lambda each: each.event_number == anEvent, self.events))
         return event.score_for(anId)

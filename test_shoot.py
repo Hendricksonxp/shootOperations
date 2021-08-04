@@ -38,8 +38,11 @@ class MyTestCase(unittest.TestCase):
         event.add_score(1, 1, 25, 24, 23, 25)
         event.add_score(1, 3, 24, 23, 23, 25)
 
-        score = shoot.score_for(1, 2104285)
-        self.assertEqual(97, score)
+        anEvent = next(filter(lambda each: each.event_number == 1, shoot.events))
+        self.assertEqual(1, anEvent.event_number)
+
+        score = anEvent.score_for('2104285')
+        self.assertEqual(95, score)
 
     def create_test_shoot(self):
         shoot = Shoot()

@@ -23,5 +23,5 @@ class Event:
         return self.event_number
 
     def score_for(self, id):
-        entry = filter(lambda each: each.id == id, self.entries)
+        entry = next(filter(lambda each: each.id() == id, self.entries))
         return entry.score()
