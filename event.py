@@ -3,18 +3,20 @@ from entry import Entry
 
 
 class Event:
-    def __init__(self, number, type, length):
+    def __init__(self, number, type, length, number_of_subevents):
         self.event_number = number
         self.type = type
         self.number_of_targets = length
         self.entries = []
+        self.number_of_subevents = number_of_subevents
 
     def add_entry(self, shooter, squad, post):
-        self.entries.append(Entry(shooter, squad, post))
+        self.entries.append(Entry(shooter, self.number_of_subevents, squad, post))
 
     def add_score(self, squad, post, score_1, score_2, score_3, score_4):
         entry = self.get_entry(squad, post)
-        entry.add_scores(score_1, score_2, score_3, score_4)
+        scores = [score_1, score_2, score_3, score_4]
+        entry.add_scores(scores)
 
     def get_entry(self, squad, post):
         return next(filter(lambda each: each.is_position(squad, post), self.entries))

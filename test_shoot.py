@@ -7,6 +7,7 @@ from entry import Entry
 
 
 
+
 class MyTestCase(unittest.TestCase):
     def test_hookup(self):
         self.assertEqual(True, True)
@@ -29,7 +30,7 @@ class MyTestCase(unittest.TestCase):
         shooter2 = self.create_test_shooter2()
         event.add_entry(shooter1, 1, 3)
 
-        self.assertEqual('2104285', Entry(shooter1, 1, 3).id())
+        self.assertEqual('2104285', Entry(shooter1, 4, 1, 3).id())
 
         event.add_entry(shooter2, 1, 1)
 
@@ -52,7 +53,7 @@ class MyTestCase(unittest.TestCase):
         return shoot
 
     def create_test_event(self, aShoot):
-        event = Event(1, "SINGLES", 100)
+        event = Event(1, "SINGLES", 100, 4)
         return event
 
     def create_test_shooter1(self):
