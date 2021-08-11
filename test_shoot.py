@@ -4,6 +4,7 @@ from shoot import Shoot
 from event import Event
 from shooter import Shooter
 from entry import Entry
+from csv import reader
 
 
 
@@ -44,6 +45,27 @@ class MyTestCase(unittest.TestCase):
 
         score = anEvent.score_for('2104285')
         self.assertEqual(95, score)
+
+    def test_southern_zone_berea_preliminary_singles(self):
+        shoot = Shoot()
+        shoot.add_club("Central Kentucky Gun Club")
+        shoot.add_start_date(date.fromisoformat('2021-07-15'))
+        shoot.add_end_date(date.fromisoformat('2021-07-18'))
+
+        event = Event(1, "SINGLES", 100, 4)
+        shoot.add_event(event)
+        counter = 1
+        with open('c:/Users/suechet/Dropbox/southernzonebereaprelimsingles.csv', 'r') as read_obj:
+            csv_reader = reader(read_obj)
+            for row in csv_reader:
+                counter = counter + 1
+                event.add_entry(Shooter(str(counter), row[0]), row[2], row[3])
+                event.add_score(row[2], row[3], row[6], row[7], row[8],row[9])
+
+        score = event.score_for('5')
+        self.assertEqual(100, score)
+
+
 
     def create_test_shoot(self):
         shoot = Shoot()
