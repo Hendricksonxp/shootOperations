@@ -2,10 +2,10 @@ from event import Event
 
 
 class Shoot:
-    def __init__(self):
-        self.start_date = ''
-        self.end_date = ''
-        self.club = ''
+    def __init__(self, club, start, end):
+        self.start_date = start
+        self.end_date = end
+        self.club = club
         self.events = []
 
     def add_event(self, anEvent):

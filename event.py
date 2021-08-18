@@ -3,12 +3,13 @@ from entry import Entry
 
 
 class Event:
-    def __init__(self, number, type, length, number_of_subevents):
+    def __init__(self, shoot, number, type, length, number_of_subevents):
         self.event_number = number
         self.type = type
         self.number_of_targets = length
         self.entries = []
         self.number_of_subevents = number_of_subevents
+        shoot.add_event(self)
 
     def add_entry(self, shooter, squad, post):
         self.entries.append(Entry(shooter, self.number_of_subevents, squad, post))

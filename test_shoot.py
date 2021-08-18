@@ -1,5 +1,6 @@
 import unittest
 from datetime import date
+from shoot_operations import Shoot_Operations
 from shoot import Shoot
 from event import Event
 from shooter import Shooter
@@ -24,7 +25,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(2, result)
 
     def test_shooter_score(self):
-        shoot = self.create_test_shoot()
+        system = Shoot_Operations.memory()
+        shoot = self.create_test_shoot(system)
         event = self.create_test_event(shoot)
         shoot.add_event(event)
         shooter1 = self.create_test_shooter1()
@@ -40,14 +42,15 @@ class MyTestCase(unittest.TestCase):
         event.add_score(1, 1, 25, 24, 23, 25)
         event.add_score(1, 3, 24, 23, 23, 25)
 
-        anEvent = next(filter(lambda each: each.event_number == 1, shoot.events))
-        self.assertEqual(1, anEvent.event_number)
+        event = next(filter(lambda each: each.event_number == 1, shoot.events))
+        self.assertEqual(1, event.event_number)
 
-        score = anEvent.score_for('2104285')
+        score = event.score_for('2104285')
         self.assertEqual(95, score)
 
     def test_southern_zone_berea_preliminary_singles(self):
-        shoot = Shoot()
+        system = Shoot_Operations.memory()
+        shoot = Shoot(system)
         shoot.add_club("Central Kentucky Gun Club")
         shoot.add_start_date(date.fromisoformat('2021-07-15'))
         shoot.add_end_date(date.fromisoformat('2021-07-18'))
@@ -65,17 +68,12 @@ class MyTestCase(unittest.TestCase):
         score = event.score_for('5')
         self.assertEqual(100, score)
 
-
-
-    def create_test_shoot(self):
-        shoot = Shoot()
-        shoot.add_club("Birmingham Gun Club")
-        shoot.add_start_date(date.fromisoformat('2019-12-04'))
-        shoot.add_end_date(date.fromisoformat('2019-12-04'))
+    def create_test_shoot(self, shoot_operations):
+        shoot = shoot_operations.create_shoot("Birmingham Gun Club",'2019-12-04','2019-12-04')
         return shoot
 
-    def create_test_event(self, aShoot):
-        event = Event(1, "SINGLES", 100, 4)
+    def create_test_event(self, shoot):
+        event = Event(shoot, 1, "SINGLES", 100, 4)
         return event
 
     def create_test_shooter1(self):
